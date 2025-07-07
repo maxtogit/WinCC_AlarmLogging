@@ -1,0 +1,10 @@
+# IDE
+.idea/
+__pycache__/
+*.py[cod]
+# Virtual environment
+venv/
+# Logs and temp files
+*.log
+*.tmp
+*.swp
