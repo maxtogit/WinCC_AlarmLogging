@@ -9,7 +9,9 @@ class WinCCViewsExporter:
         self.server = server or os.environ['COMPUTERNAME'] + "\\WINCC"
         self.target_views = [
             "AlgViewENU_ID_OPT",  # Английское представление
-            "AlgViewRUS_ID_OPT"  # Русское представление
+            "AlgViewRUS_ID_OPT",  # Русское представление
+            "AlgViewDEU_ID_OPT",  # DEU
+
         ]
         self.conn = None
         self.cur = None
