@@ -5,9 +5,9 @@ from datetime import datetime
 from typing import List, Optional, Tuple, Any, Iterator
 
 
-class WinCCViewsExporter:
+class WinCC_AlarmLogging_Exporter:
     """
-    A class to export data from specific WinCC views in SQL Server databases.
+    A class to export data (AlarmLogging) from specific WinCC views in SQL Server databases.
     Exports target views from all databases containing '_ALG_' in their names.
     """
 
@@ -23,11 +23,12 @@ class WinCCViewsExporter:
             "AlgViewENU_ID_OPT",  # English view
             "AlgViewRUS_ID_OPT",  # Russian view
             "AlgViewDEU_ID_OPT",  # German view
+                                  # other languages can be added
         ]
         self.conn: Optional[pyodbc.Connection] = None  # Database connection
         self.cur: Optional[pyodbc.Cursor] = None  # Database cursor
 
-    def export_views_data(self, output_dir: str = "wincc_views_export") -> None:
+    def export_alarmlogging_data(self, output_dir: str = "wincc_alarmlogging_export") -> None:
         """
         Export data from target views in all _ALG_ databases.
 
@@ -51,7 +52,7 @@ class WinCCViewsExporter:
             self.close()
 
     def _connect_to_master(self) -> None:
-        """Establish connection to master database to find other databases."""
+        """Establish connection to master database to find other databases. Set cursor"""
         self.conn = pyodbc.connect(
             f"DRIVER={{SQL Server}};"
             f"SERVER={self.server};"
@@ -170,6 +171,6 @@ class WinCCViewsExporter:
 
 
 if __name__ == "__main__":
-    # Example usage with specific server
-    exporter: WinCCViewsExporter = WinCCViewsExporter("172.16.0.244\\WINCC")
-    exporter.export_views_data()
+
+    exporter = WinCC_AlarmLogging_Exporter("172.16.0.244\\WINCC")
+    exporter.export_alarmlogging_data()
